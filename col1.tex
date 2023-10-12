@@ -1,0 +1,131 @@
+\documentclass[10pt,a4paper,oneside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{stmaryrd}
+\usepackage{cmll}
+\usepackage{mathrsfs}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
+\usepackage{proof}
+\usepackage{tikz}
+\usepackage{multicol}
+\usepackage{mathabx}
+\usepackage{comment}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+\usepackage{cmll}
+\usepackage{xcolor}
+\usepackage{proof}
+\usepackage[normalem]{ulem}
+
+\begin{document}
+
+\section{Исчисление высказываний}
+
+\subsection{Предметный язык и язык исследователя (метаязык). Соглашения об обозначениях. Схемы формул.}
+Высказывание --- это строка, сформированная по следующим правилам.
+
+\subsection{Оценка высказываний, общезначимость, следование.}
+
+\subsubsection{}
+Чтобы задать оценку высказываний:
+Зафиксируем множество истинностных значений $V = \{\textit{И},\textit{Л}\,\}$
+
+Определим функцию оценки переменных (\emph{интерпретацию}) $f: P \rightarrow V$\\
+(P --- множество пропозициональных переменных).
+Если $\llbracket A \rrbracket = \textit{Л}$ и $\llbracket B \rrbracket = \textit{И}$,
+то $\llbracket (A\rightarrow B)\rightarrow (B\rightarrow A) \rrbracket = \textit{Л}$
+
+\subsubsection{}
+Синтаксис для указания функции оценки переменных
+$$\llbracket \alpha \rrbracket^{X_1 := v_1,\ \dots,\ X_n := v_n}$$
+Это всё метаязык --- потому полагаемся на здравый смысл
+$$\llbracket A \with B \with (C \rightarrow C) \rrbracket^{A := \textit{И},\ B := \llbracket \neg A \rrbracket}$$
+
+\subsubsection{}
+
+\begin{enumerate}
+    \item Переменные $$\llbracket X \rrbracket = f(X)\quad\quad\quad \llbracket X \rrbracket^{X := a} = a$$ \vspace{-0.3cm}
+    \item Отрицание $$\llbracket \neg \alpha \rrbracket = 
+      \left\{\begin{array}{ll}\textit{Л},&\textit{если }\llbracket\alpha\rrbracket=\textit{И}\\
+                            \textit{И},&\textit{иначе}\end{array}\right.$$ \vspace{-0.1cm}
+    \item Конъюнкция $$\llbracket \alpha \with \beta \rrbracket = 
+      \left\{\begin{array}{ll}\textit{И},&\textit{если }\llbracket\alpha\rrbracket=\llbracket\beta\rrbracket=\textit{И}\\ 
+                            \textit{Л},&\textit{иначе}\end{array}\right.$$ \vspace{-0.1cm}
+    \item Дизъюнкция $$\llbracket \alpha \vee \beta \rrbracket = 
+      \left\{\begin{array}{ll}\textit{Л},&\textit{если }\llbracket\alpha\rrbracket=\llbracket\beta\rrbracket=\textit{Л}\\
+                            \textit{И},&\textit{иначе}\end{array}\right.$$ \vspace{-0.1cm}
+    \item Импликация $$\llbracket \alpha \rightarrow \beta \rrbracket = 
+      \left\{\begin{array}{ll}\textit{Л},&\textit{если }\llbracket\alpha\rrbracket=\textit{И},\ \llbracket\beta\rrbracket=\textit{Л}\\
+                            \textit{И},&\textit{иначе}\end{array}\right.$$
+\end{enumerate}
+
+\subsubsection{}
+
+Если $\alpha$ истинна при любой оценке переменных, то она \emph{общезначима} (является \emph{тавтологией}):
+$$\models \alpha$$
+
+
+Выражение $A\rightarrow A$ --- тавтология. 
+Переберём все возможные значения единственной переменной $A$:
+
+$$
+\begin{array}{l} \llbracket A\rightarrow A \rrbracket ^ {A := \textit{И}} = \textit{И} \\
+ \llbracket A\rightarrow A \rrbracket ^ {A := \textit{Л}} = \textit{И} \end{array}
+$$
+
+Выражение $A\rightarrow\neg A$ тавтологией не является:
+
+$$\llbracket A\rightarrow\neg A \rrbracket ^ {A := \textit{И}} = \textit{Л}$$
+
+\subsubsection{}
+\begin{enumerate}
+    \item Если $\alpha$ истинна при любой оценке переменных, при которой истинны 
+    высказывания $\gamma_1, \dots, \gamma_n$, будем говорить, что $\alpha$ --- \emph{следствие} этих высказываний:
+    $$\gamma_1, \dots, \gamma_n \models \alpha$$
+    \item Истинна при какой-нибудь оценке --- \emph{выполнима}.
+    \item Не истинна ни при какой оценке --- \emph{невыполнима}.
+    \item Не истинна при какой-нибудь оценке --- \emph{опровержима}.
+\end{enumerate}
+
+\subsection{Доказуемость, гипотезы (контекст), выводимость.}
+\subsubsection{}
+Доказательством (выводом) назовём конечную последовательность высказываний $\delta_1, \delta_2, \dots, \delta_n$,
+причём каждое $\delta_i$ либо:
+\begin{enumerate}
+\item является аксиомой --- существует замена метапеременных для какой-либо схемы аксиом, позволяющая получить
+формулу $\delta_i$, либо
+\item получается из $\delta_1,\dots,\delta_{i-1}$ по правилу Modus Ponens --- существуют такие индексы $j < i$ и $k < i$,
+что $\delta_k \equiv \delta_j\rightarrow\delta_i$.
+\end{enumerate}
+
+\subsubsection{}
+
+(доказательство формулы $\alpha$)
+--- такое доказательство (вывод) $\delta_1, \delta_2, \dots, \delta_n$,
+что $\alpha\equiv\delta_n$.
+
+Формула $\alpha$ доказуема (выводима), если существует её доказательство. Обозначение:
+$$\vdash \alpha$$
+
+\subsubsection{}
+(вывод формулы $\alpha$ из гипотез $\gamma_1,\dots,\gamma_k$)
+    --- такая последовательность
+    $\delta_1,\dots,\delta_n$, причём каждое $\delta_i$ либо:
+    \begin{enumerate}
+    \item является аксиомой;
+    \item либо получается по правилу Modus Ponens из предыдущих;
+    \item либо является одной из гипотез: существует $t: \delta_i \equiv \gamma_t$.
+    \end{enumerate}
+
+
+\section{Корректность, полнота, противоречивость и непротиворечивость (эквивалентные формулировки).}
+
+
+\end{document}
