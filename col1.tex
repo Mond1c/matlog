@@ -30,7 +30,7 @@
 \section{Исчисление высказываний}
 
 \subsection{Предметный язык и язык исследователя (метаязык). Соглашения об обозначениях. Схемы формул.}
-Высказывание --- это строка, сформированная по следующим правилам.
+
 
 \subsection{Язык исчисления высказываний.}
 \noindent \textbf{ Определение. }
@@ -53,7 +53,8 @@ $$(((A\rightarrow B)\vee (B\rightarrow C)) \vee (C \rightarrow A))$$
 
 \subsection{Оценка высказываний, общезначимость, следование.}
 
-\subsubsection{}
+\subsubsection{Оценка высказываний.}
+\noindent \textbf{ Определение. }
 Чтобы задать оценку высказываний:
 Зафиксируем множество истинностных значений $V = \{\textit{И},\textit{Л}\,\}$
 
@@ -62,13 +63,14 @@ $$(((A\rightarrow B)\vee (B\rightarrow C)) \vee (C \rightarrow A))$$
 Если $\llbracket A \rrbracket = \textit{Л}$ и $\llbracket B \rrbracket = \textit{И}$,
 то $\llbracket (A\rightarrow B)\rightarrow (B\rightarrow A) \rrbracket = \textit{Л}$
 
-\subsubsection{}
+\subsubsection{Синтаксис.}
+\noindent \textbf{ Определение. }
 Синтаксис для указания функции оценки переменных
 $$\llbracket \alpha \rrbracket^{X_1 := v_1,\ \dots,\ X_n := v_n}$$
 Это всё метаязык --- потому полагаемся на здравый смысл
 $$\llbracket A \with B \with (C \rightarrow C) \rrbracket^{A := \textit{И},\ B := \llbracket \neg A \rrbracket}$$
 
-\subsubsection{}
+\subsubsection{Оценка высказываний рекурсивно.}
 
 \begin{enumerate}
     \item Переменные $$\llbracket X \rrbracket = f(X)\quad\quad\quad \llbracket X \rrbracket^{X := a} = a$$ \vspace{-0.3cm}
@@ -86,7 +88,7 @@ $$\llbracket A \with B \with (C \rightarrow C) \rrbracket^{A := \textit{И},\ B 
                             \textit{И},&\textit{иначе}\end{array}\right.$$
 \end{enumerate}
 
-\subsubsection{}
+\subsubsection{Тавтологии}
 
 Если $\alpha$ истинна при любой оценке переменных, то она \emph{общезначима} (является \emph{тавтологией}):
 $$\models \alpha$$
@@ -104,7 +106,7 @@ $$
 
 $$\llbracket A\rightarrow\neg A \rrbracket ^ {A := \textit{И}} = \textit{Л}$$
 
-\subsubsection{}
+\subsubsection{Определения}
 \begin{enumerate}
     \item Если $\alpha$ истинна при любой оценке переменных, при которой истинны 
     высказывания $\gamma_1, \dots, \gamma_n$, будем говорить, что $\alpha$ --- \emph{следствие} этих высказываний:
@@ -115,7 +117,8 @@ $$\llbracket A\rightarrow\neg A \rrbracket ^ {A := \textit{И}} = \textit{Л}$$
 \end{enumerate}
 
 \subsection{Доказуемость, гипотезы (контекст), выводимость.}
-\subsubsection{}
+\subsubsection{Вывод}
+\noindent \textbf{ Определение. }
 Доказательством (выводом) назовём конечную последовательность высказываний $\delta_1, \delta_2, \dots, \delta_n$,
 причём каждое $\delta_i$ либо:
 \begin{enumerate}
@@ -125,8 +128,8 @@ $$\llbracket A\rightarrow\neg A \rrbracket ^ {A := \textit{И}} = \textit{Л}$$
 что $\delta_k \equiv \delta_j\rightarrow\delta_i$.
 \end{enumerate}
 
-\subsubsection{}
-
+\subsubsection{Доказуемость}
+\noindent \textbf{ Определение. }
 (доказательство формулы $\alpha$)
 --- такое доказательство (вывод) $\delta_1, \delta_2, \dots, \delta_n$,
 что $\alpha\equiv\delta_n$.
@@ -134,7 +137,8 @@ $$\llbracket A\rightarrow\neg A \rrbracket ^ {A := \textit{И}} = \textit{Л}$$
 Формула $\alpha$ доказуема (выводима), если существует её доказательство. Обозначение:
 $$\vdash \alpha$$
 
-\subsubsection{}
+\subsubsection{Выводимость}
+\noindent \textbf{ Определение. }
 (вывод формулы $\alpha$ из гипотез $\gamma_1,\dots,\gamma_k$)
     --- такая последовательность
     $\delta_1,\dots,\delta_n$, причём каждое $\delta_i$ либо:
@@ -144,7 +148,8 @@ $$\vdash \alpha$$
     \item либо является одной из гипотез: существует $t: \delta_i \equiv \gamma_t$.
     \end{enumerate}
 
-\subsubsection{}
+\subsubsection{Контекст}
+\noindent \textbf{ Определение. }
 Будем обозначать большими греческими буквами середины
 алфавита, возможно с индексами, ($\Gamma$, $\Delta_1$, ...) списки формул.
 Будем использовать, где удобно:
