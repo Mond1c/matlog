@@ -32,6 +32,25 @@
 \subsection{Предметный язык и язык исследователя (метаязык). Соглашения об обозначениях. Схемы формул.}
 Высказывание --- это строка, сформированная по следующим правилам.
 
+\subsection{Язык исчисления высказываний.}
+\noindent \textbf{ Определение. }
+Высказывание --- это строка, сформированная по следующим правилам.
+
+\begin{enumerate}
+\item Атомарное высказывание --- пропозициональная переменная: $A, B', C_{1234}$ 
+
+\item Составное высказывание: если $\alpha$ и $\beta$ --- высказывания, то высказываниями являются:
+\begin{enumerate}
+\item Отрицание: $(\neg\alpha)$ 
+\item Конъюнкция: $(\alpha\with\beta)\ \ \textit{или}\ \ (\alpha\wedge\beta)$ 
+\item Дизъюнкция: $(\alpha\vee\beta)$ 
+\item Импликация: $(\alpha\rightarrow\beta)\ \ \textit{или}\ \ (\alpha\supset\beta)$ 
+\end{enumerate}
+\end{enumerate}
+
+\noindent \textbf{ Пример. }
+$$(((A\rightarrow B)\vee (B\rightarrow C)) \vee (C \rightarrow A))$$
+
 \subsection{Оценка высказываний, общезначимость, следование.}
 
 \subsubsection{}
@@ -124,6 +143,21 @@ $$\vdash \alpha$$
     \item либо получается по правилу Modus Ponens из предыдущих;
     \item либо является одной из гипотез: существует $t: \delta_i \equiv \gamma_t$.
     \end{enumerate}
+
+\subsubsection{}
+Будем обозначать большими греческими буквами середины
+алфавита, возможно с индексами, ($\Gamma$, $\Delta_1$, ...) списки формул.
+Будем использовать, где удобно:
+
+$$\Gamma \vdash \alpha$$\pause
+
+Списки можно указывать через запятую:
+
+$$\Gamma, \Delta, \zeta \vdash \alpha$$\pause
+это означает то же, что и 
+$$\gamma_1,\gamma_2,\dots,\gamma_n,\delta_1,\delta_2,\dots,\delta_m,\zeta\vdash\alpha$$
+если 
+$$\Gamma := \{\gamma_1,\gamma_2,\dots,\gamma_n\},\quad \Delta := \{\delta_1,\delta_2,\dots,\delta_m\}$$
 
 
 \subsection{Корректность, полнота, противоречивость и непротиворечивость (эквивалентные формулировки).}
