@@ -22,6 +22,7 @@
 \usepackage{cmll}
 \usepackage{xcolor}
 \usepackage{proof}
+\usetikzlibrary{hobby,fit,backgrounds,calc,shapes.geometric,patterns}
 \usepackage[normalem]{ulem}
 
 \begin{document}
@@ -125,7 +126,439 @@ $$\vdash \alpha$$
     \end{enumerate}
 
 
-\section{Корректность, полнота, противоречивость и непротиворечивость (эквивалентные формулировки).}
+\subsection{Корректность, полнота, противоречивость и непротиворечивость (эквивалентные формулировки).}
+
+\subsubsection{Корректность}
+\textbf{ Лемма. }
+Теория корректна, если любое доказуемое в ней утверждение общезначимо.
+То есть, $\vdash\alpha$ влечёт $\models\alpha$.
 
 
+\noindent \textbf{ Лемма. } Если $\vdash\alpha$, то $\models\alpha$
+
+\subsubsection{Полнота}
+\noindent \textbf{ Лемма. } Теория полна, если любое общезначимое в ней утверждение доказуемо.
+То есть, $\models\alpha$ влечёт $\vdash\alpha$.
+
+\subsection{Теорема о дедукции для исчисления высказываний (формулировка). Теорема о полноте исчисления высказываний (формулировка)}
+
+\subsubsection{Теорема о дедукции для исчисления высказываний}
+
+\noindent \textbf{ Теорема. }
+$\Gamma,\alpha\vdash\beta$ выполнено тогда и только тогда, когда выполнено $\Gamma\vdash\alpha\rightarrow\beta$
+
+\subsubsection{Теорема о полноте исчисления высказываний}
+\noindent \textbf{ Теорема. }
+Если $\models\alpha$, то $\vdash\alpha$.
+
+\section{Топологическое пространство}
+\subsection{Определение.}
+\subsubsection{}
+\noindent \textbf{ Определение. }
+Топологическим пространством называется упорядоченная пара $\langle X, \Omega \rangle$,
+где $X$ --- некоторое множество, а $\Omega \subseteq \mathcal{P}(X)$, причём:
+\begin{enumerate}
+\item $\varnothing, X \in \Omega$
+\item если $A_1, \dots, A_n \in \Omega$, то $A_1 \cap A_2 \cap \dots \cap A_n \in \Omega$;
+\item если $\{A_\alpha\}$ --- семейство множеств из $\Omega$, то и $\bigcup_\alpha A_\alpha \in \Omega$.
+\end{enumerate}
+
+Множество $\Omega$ называется \emph{топологией}.
+Элементы $\Omega$ называются открытыми множествами.
+
+\subsection{Метрическое пространство.}
+\subsubsection{}
+\noindent \textbf{ Определение. }
+Метрикой на $X$ назовём множество, на котором определена функция расстояния $d: X^2 \rightarrow \mathbb{R}^+$, 
+удовлетворяющая следующим свойствам:
+\begin{enumerate}
+\item $d(x,y) = 0$ тогда и только тогда, когда $x = y$
+\item $d(x,y) = d(y,x)$
+\item $d(x,z) \le d(x,y) + d(y,z)$ (неравенство треугольника)
+\end{enumerate}
+
+\noindent \textbf{ Определение. }
+Открытым $\varepsilon$-шаром с центром в точке $x \in X$ назовём $O_\varepsilon(x) = \{ t \in X\ |\ d(x,t) < \varepsilon \}$.
+
+
+\noindent \textbf{ Определение. }
+Если $X$ --- некоторое множество и $d$ --- метрика на $X$, то будем говорить, что топологическое
+пространство, задаваемое базой $\mathcal{B} = \{ O_\varepsilon(x)\ |\ \varepsilon \in \mathbb{R}^+, x \in X \}$,
+порождено метрикой $d$.
+
+\subsection{Примеры (топология стрелки, Зарисского, топология на дереьвях). }
+\subsubsection{Топология стрелки}
+
+
+\noindent \textbf{ Определение. } Топология стрелки: $\langle \mathbb{R}, \{(x,+\infty)\ |\ x\in\mathbb{R}\}\cup\{\varnothing,\mathbb{R}\}\rangle$ --- открыты все положительные лучи.
+
+
+\subsubsection{Топология Зарисского}
+
+\subsubsection{Топология на дереьвях}
+
+\noindent \textbf{ Определение. } Пусть некоторый лес задан конечным множеством вершин $V$ и
+отношением $(\preceq)$, связывающим предков и потомков ($a \preceq b$, если $b$ --- потомок $a$). Тогда подмножество его вершин $X\subseteq V$ назовём открытым, 
+если из $a \in X$ и $a \preceq b$ следует, что $b \in X$.
+
+\noindent \textbf{ Лемма. } Лес связен (является одним деревом) тогда и только тогда, когда соответствующее ему 
+топологическое пространство связно.
+
+\subsection{Открытые и замкнутые множества. Связность. Компактность. }
+
+\subsubsection{Открытые и замкнутые множества.}
+
+\noindent \textbf{ Определение. } Множество $\Omega$ называется \emph{топологией}.
+\noindent \textbf{ Определение. } Элементы $\Omega$ называются открытыми множествами.
+
+\subsubsection{Связность.}
+
+\noindent \textbf{ Определение. } Пространство $\langle X, \Omega\rangle$ связно, если нет $A,B \in \Omega$, что $A\cup B = X$,
+$A \cap B = \varnothing$ и $A,B \ne \varnothing$.
+
+\subsubsection{Компактность.}
+
+\noindent \textbf{ Определение. } Будем говорить, что множество компактно, если из любого его открытого покрытия можно выбрать конечное
+подпокрытие.
+
+\noindent \textbf{ Пример. } Множество $\{0,1\}$ в дискретной топологии компактно.
+
+
+\noindent \textbf{ Пример. } Интервал $(0,1)$ в $\mathbb{R}$ не компактен --- например, рассмотрим покрытие $\{(\varepsilon,1)\ |\ \varepsilon\in(0,1)\}$ 
+
+\subsection{Непрерывные функции. Путь. Линейная связность. }
+\subsubsection{Непрерывные функции.}
+
+\noindent \textbf{ Определение. } 
+Функция $f: X \rightarrow Y$ непрерывна, если прообраз любого открытого множества открыт.
+
+\noindent \textbf{ Пример. } 
+Функция $f: \mathbb{N} \rightarrow \mathbb{R}$ всегда непрерывна (при дискретной топологии на $\mathbb{N}$), 
+поскольку любое множество в $\mathbb{N}$ открыто.
+
+\subsubsection{Путь.}
+
+\subsubsection{Линейная связность.}
+
+
+\section{Интуиционистское исчисление высказываний}
+\subsection{Доказательства чистого существования.}
+
+\noindent \textbf{ Теорема. }
+Любое непрерывное отображение $f$ шара в $\mathbb{R}^n$ на себя имеет неподвижную точку
+
+\noindent \textbf{ Теорема. }
+Существует пара иррациональных чисел $a$ и $b$,
+такая, что $a^b$ — рационально.
+
+\subsection{BHK-интерпретация.}
+BHK — это сокращение трёх фамилий: Брауэр, Гейтинг, Колмогоров.
+
+\begin{enumerate}
+
+\item $\alpha\ \&\ \beta$ построено, если построены $\alpha$ и $\beta$
+\item $\alpha \vee \beta$ построено, если построено $\alpha$ или $\beta$,
+и мы знаем, что именно
+\item $\alpha\rightarrow\beta$ построено, если есть способ перестроения
+$\alpha$ в $\beta$
+\item $\bot$ — конструкция, не имеющая построения
+\item $\neg\alpha$ построено, если построено $\alpha\rightarrow\bot$
+
+\end{enumerate}
+
+
+\subsection{Решётки.}
+\noindent \textbf{ Определение. } 
+Решёткой называется упорядоченная пара: $\langle X, (\preceq)\rangle$, 
+где $X$ --- некоторое множество, а $(\preceq)$ --- частичный порядок на $X$, такой, 
+что для любых $a,b \in X$ определены $a + b = \sup\{a,b\}$ и $a \cdot b = \inf\{a,b\}$.
+
+\noindent \textbf{ Пример. } 
+$\langle\Omega, (\subseteq)\rangle$ --- решётка.
+$\langle\mathbb{N}\setminus\{1\}, (\raisebox{-0.75pt}{\vdots})\rangle$ --- не решётка.
+
+\subsection{Дистрибутивная решётка. Пентагон и диамант.}
+
+\noindent \textbf{ Определение. } 
+Дистрибутивной решёткой называется такая, что для любых $a,b,c$ выполнено
+$a \cdot (b + c) = a \cdot b + a \cdot c$.
+
+\noindent \textbf{ Определение. } 
+Импликативная решётка --- такая, в которой для любых элементов есть псевдодополнение.
+
+\noindent \textbf{ Лемма. } 
+Любая импликативная решётка --- дистрибутивна.
+
+\noindent \textbf{ Определение. }
+Псевдодополнением $a \rightarrow b$ называется наибольший из $\{ x \ |\ a \cdot x \preceq b\}$.
+
+\noindent \textbf{ Пример. } 
+
+\begin{center}\tikz{
+  \node[circle,inner sep=0.3] (A) at (1,-1.3) {$a$};
+  \node[fill=cyan!0.2,circle,inner sep=0.3] (B) at (0.5,-0.5) {$b$};
+  \node[circle,inner sep=0.3] (C) at (1.5,-0.5) {$c$};
+  \node[circle,inner sep=0.3] (D) at (1,0.3) {$d$};
+  \foreach \b/\e in {A/B, A/C, B/D, C/D} {
+      \draw[stealth-, line width=1, color=black!50!green] (\b) to (\e);
+  }
+
+  \node (txt) at (4,-0.5) { \begin{tabular}{l} $a \cdot b = a$ \\ $b \cdot b = b$ \\ $c \cdot b = a$ \\ $d \cdot b = b$ \end{tabular} };
+  \draw[fill=cyan,fill=cyan,opacity=0.2](C.north west) 
+     to[closed,curve through={
+       (A.south west) .. (A.south east)
+     }] (C.north east);
+}\end{center}
+
+Здесь $b \rightarrow c = \text{наиб}\{x\ |\ b \cdot x \preceq c\} = \text{наиб}\{ a, c \} = c$
+
+
+\noindent \textbf{ Пример. (нет псевдодополнения: диамант и пентагон)}
+
+\begin{center}\tikz{
+  \node[circle,inner sep=0.3] (A) at (1,-1.3) {$a$};
+  \node[circle,inner sep=0.3] (B) at (0,-0.5) {$b$};
+  \node[circle,inner sep=0.3] (C) at (1,-0.5) {$c$};
+  \node[circle,inner sep=0.3] (D) at (2,-0.5) {$d$};
+  \node[circle,inner sep=0.3] (E) at (1,0.3) {$e$};
+  \foreach \b/\e in {A/B, A/C, A/D, B/E, C/E, D/E} {
+      \draw[stealth-, line width=1, color=black!50!green] (\b) to (\e);
+  }
+  \draw[pattern=north west lines,opacity=0.5,pattern color=olive](C.north west) 
+     to[closed,curve through={
+       (A.south west) .. (A.south east) .. (D.south east)
+     }] (D.north east);
+  \node (BC) at (1,-1.8) {$b \rightarrow c = \text{наиб}\{ a, c, d \}$};
+
+  \node[circle,inner sep=0.3] (A1) at (9,-1.3) {$a$};
+  \node[circle,inner sep=0.3] (B1) at (8,-1) {$b$};
+  \node[circle,inner sep=0.3] (C1) at (8,0) {$c$};
+  \node[circle,inner sep=0.3] (D1) at (10,-0.5) {$d$};
+  \node[circle,inner sep=0.3] (E1) at (9,0.3) {$e$};
+  \foreach \b/\e in {A1/B1, B1/C1, C1/E1, A1/D1, D1/E1} {
+      \draw[stealth-, line width=1, color=black!50!green] (\b) to (\e);
+  }
+
+  \node (B1C1) at (9,-1.8) {$c \rightarrow b = \text{наиб}\{ a, b, d \}$};
+  \draw[pattern=north west lines,opacity=0.5,pattern color=olive](B1.north west) 
+     to[closed,curve through={
+       (A1.south east) .. (D1.south east) .. (D1.north east)
+     }] (B1.north east);
+}\end{center}
+
+
+\subsection{Булевы и псевдобулевы алгебры.}
+\noindent \textbf{ Определение. }
+0 --- наименьший элемент решётки, а 1 --- наибольший элемент решётки.
+
+\noindent \textbf{ Лемма. }
+В любой импликативной решётке $\langle X, (\preceq)\rangle$ есть 1.
+
+\noindent \textbf{ Определение. }
+Импликативная решётка с 0 --- псевдобулева алгебра (алгебра Гейтинга).
+В такой решётке определено $\sim a := a \rightarrow 0$.
+
+\noindent \textbf{ Определение. }
+Булева алгебра --- псевдобулева алгебра, в которой $a\ + \sim a = 1$ для всех $a$.
+
+\subsection{Алгебра Линденбаума.}
+\noindent \textbf{ Определение. }
+Определим предпорядок на высказываниях: $\alpha \preceq \beta := \alpha \vdash \beta$ в интуиционистском исчислении высказываний.
+Также $\alpha\approx\beta$, если $\alpha\preceq\beta$ и $\beta\preceq\alpha$.
+
+\noindent \textbf{ Определение. }
+Пусть $L$ --- множество всех высказываний. Тогда алгебра Линденбаума $\mathcal{L} = L/_\approx$.
+
+\noindent \textbf{ Теорема. }
+$\mathcal{L}$ --- псевдобулева алгебра.
+
+\subsection{Полнота интуиционистского исчисления высказываний в псевдобулевых алгебрах (формулировка, идея доказательства).}
+\noindent \textbf{ Теорема. }
+Пусть $\llbracket\alpha\rrbracket = [\alpha]_\mathcal{L}$.
+Такая оценка интуиционистского исчисления высказываний алгеброй Линденбаума является согласованной.
+
+\noindent \textbf{ Теорема. }
+Интуиционистское исчисление высказываний полно в псевдобулевых алгебрах:
+если $\models\alpha$ во всех псевдобулевых алгебрах, то $\vdash\alpha$. 
+
+\subsection{Модели Крипке. Вынужденность.}
+\noindent \textbf{ Определение. }
+Модель Крипке $\langle \mathcal{W}, \preceq, (\Vdash)\rangle$:
+\begin{enumerate}
+\item $\mathcal{W}$ --- множество миров, $(\preceq)$ --- нестрогий частичный порядок на $\mathcal{W}$;
+\item $(\Vdash)\subseteq \mathcal{W}\times P$ --- отношение вынуждения
+между мирами и переменными, причём, если $W_i \preceq W_j$ и $W_i \Vdash X$, то $W_j \Vdash X$.
+\end{enumerate}
+
+
+\noindent Доопределим вынужденность:
+\begin{enumerate}
+\item $W \Vdash \alpha\with\beta$, если $W \Vdash \alpha$ и $W \Vdash \beta$;
+\item $W \Vdash \alpha\vee\beta$, если $W \Vdash \alpha$ или $W \Vdash \beta$;
+\item $W \Vdash \alpha\rightarrow\beta$, если всегда при $W \preceq W_1$ и $W_1 \Vdash \alpha$ выполнено $W_1 \Vdash \beta$
+\item $W \Vdash \neg\alpha$, если всегда при $W \preceq W_1$ выполнено $W_1 \not\Vdash \alpha$.
+\end{enumerate}
+
+Будем говорить, что $\Vdash\alpha$, если $W\Vdash\alpha$ при всех $W \in \mathcal{W}$.
+Будем говорить, что $\models_\kappa\alpha$, если $\Vdash\alpha$ во всех моделях Крипке.
+
+\subsection{Сведение моделей Крипке к псевдобулевым алгебрам.}
+\noindent \textbf{ Лемма. }
+Если $W_1 \Vdash \alpha$ и $W_1 \preceq W_2$, то $W_2 \Vdash \alpha$
+
+\noindent \textbf{ Теорема. }
+Пусть $\langle \mathcal{W}, (\preceq), (\Vdash)\rangle$ ---
+некоторая модель Крипке.
+Тогда она есть корректная модель интуиционистского исчисления высказываний.
+
+
+\subsection{Нетабличность ИИВ (формулировка теоремы).}
+
+\noindent \textbf{ Определение. }
+Пусть задано $V$, значение $T \in V$ (<<истина>>), функция $f_P: P \rightarrow V$, 
+функции $f_\with, f_\vee, f_\rightarrow : V \times V \rightarrow V$,
+функция $f_\neg: V \rightarrow V$.
+
+Тогда оценка $\llbracket X \rrbracket = f_P(X)$, 
+$\llbracket \alpha\star\beta \rrbracket = f_\star(\llbracket \alpha \rrbracket, \llbracket \beta \rrbracket)$,
+$\llbracket \neg\alpha \rrbracket = f_\neg(\llbracket\alpha\rrbracket)$ --- табличная.
+
+\noindent \textbf{ Определение. }
+Табличная модель конечна, если $V$ конечно.
+
+\noindent \textbf{ Теорема. }
+Не существует полной конечной табличной модели для интуиционистского исчисления высказываний.
+
+\section{Дизъюнктивность интуиционистского исчисления высказываний.}
+\subsection{Гёделева алгебра. Операция $\Gamma(A)$.}
+\noindent \textbf{ Определение. }
+Для алгебры Гейтинга $\mathcal{A} = \langle A, (\preceq) \rangle$ определим операцию <<гёделевизации>>: 
+$\Gamma(\mathcal{A}) = \langle A\cup\{\omega\}, (\preceq_{\Gamma(\mathcal{A})}) \rangle$, где
+отношение $(\preceq_{\Gamma(\mathcal{A})})$ --- минимальное отношение порядка,
+удовлетворяющее условиям:
+
+\vspace{-0.5cm}
+\begin{center}\begin{tabular}{cc}
+\begin{minipage}{9cm}
+\begin{enumerate}
+\item $a \preceq_{\Gamma(\mathcal{A})} b$, если $a \preceq_\mathcal{A} b$ и $a,b \notin \{\omega,1\}$;
+\item $a \preceq_{\Gamma(\mathcal{A})} \omega$, если $a \ne 1$;
+\item $\omega \preceq_{\Gamma(\mathcal{A})} 1$
+\end{enumerate}
+\end{minipage}
+&
+\begin{minipage}{4cm}\begin{center}
+\tikz{
+    \filldraw[pattern=north west lines,pattern color=gray] (1,-1) circle (1cm);
+    \node[right] at (2.2,-1) (A) {$A \setminus \{1\}$};
+    \node[circle,fill,inner sep=2pt, outer sep=0pt,label=right:$1$] at (1,1) (Max) {};
+    \node[circle,fill,inner sep=2pt, outer sep=0pt,label=above right:$\omega$] at (1,0) (Omega) {}; 
+    \draw[-stealth,line width=1] (Max) to (Omega);
+}\end{center}
+\end{minipage}
+\end{tabular}\end{center}
+
+\noindent \textbf{ Теорема. }
+$\Gamma(\mathcal{A})$ --- гёделева алгебра.
+
+\noindent \textbf{ Теорема. }
+Рассмотрим оценку $\llbracket \alpha \rrbracket_{\Gamma(\mathcal{L})} = \llbracket \alpha \rrbracket_\mathcal{L}$.
+Тогда она является согласованной с ИИВ.
+
+\subsection{Дизъюнктивность ИИВ (формулировка).}
+\noindent \textbf{ Определение. }
+Исчисление дизъюнктивно, если при любых $\alpha$ и $\beta$ из $\vdash\alpha\vee\beta$ следует $\vdash\alpha$ или $\vdash\beta$.
+
+\noindent \textbf{ Определение. }
+Решётка гёделева, если $a + b = 1$ влечёт $a = 1$ или $b = 1$.
+
+\noindent \textbf{ Теорема. }
+Интуиционистское исчисление высказываний дизъюнктивно.
+
+\section{Разрешимость интуиционистского исчисления высказываний (формулировка).}
+\noindent \textbf{ Теорема. }
+Если $\not\vdash \alpha$ в ИИВ, то существует $\mathcal{G}$,
+что $\mathcal{G} \not\models \alpha$, причём $|\mathcal{G}| \le 2^{2^{|\alpha|+2}}$.
+
+\noindent \textbf{ Теорема. }
+ИИВ разрешимо.
+
+
+\section{Исчисление предикатов.}
+\subsection{Язык исчисления предикатов.}
+\noindent \textbf{ Определение. }
+\begin{enumerate}
+\item Два типа: предметные и логические выражения. 
+\item Предметные выражения: метапеременная {\color{blue}$\theta$}. 
+\begin{enumerate}
+\item Предметные переменные: {\color{blue}$a$}, {\color{blue}$b$}, {\color{blue}$c$}, \dots, метапеременные {\color{blue}$x$}, {\color{blue}$y$}. 
+\item Функциональные выражения: {\color{blue}$f(\theta_1,\dots,\theta_n)$}, метапеременные {\color{blue}$f$}, {\color{blue}$g$}, \dots\\
+%Имена разнообразны: {\color{blue}$(\theta_1+\theta_2)$}, {\color{blue}$0$} и т.п.
+\item Примеры: %{\color{blue}$(x+1)^2$}. \\
+% Раскроем сокращения: {\color{blue}$(\theta_0+\theta_1)\equiv p(\theta_0,\theta_1)$},
+%   {\color{blue}$\theta_1^2\equiv q(\theta_1)$}, {\color{blue}$1\equiv r$}, {\color{blue}$2\equiv s$}. \\
+  {\color{blue}$r$},
+  {\color{blue}$q(p(x,s),r)$}.
+\end{enumerate}
+\item Логические выражения: метапеременные {\color{blue}$\alpha$}, {\color{blue}$\beta$}, {\color{blue}$\gamma$}, \dots
+\begin{enumerate}
+\item Предикатные выражения: {\color{blue}$P(\theta_1,\dots,\theta_n)$}, метапеременная {\color{blue}$P$}.\\
+Имена: {\color{blue}$A$}, {\color{blue}$B$}, {\color{blue}$C$}, \dots  %также {\color{blue}$(\theta_1=\theta_2)$} и т.п.
+\item Связки: {\color{blue}$(\varphi\vee\psi)$}, {\color{blue}$(\varphi\with\psi)$}, {\color{blue}$(\varphi\rightarrow\psi)$}, 
+   {\color{blue}$(\neg\varphi)$}.
+\item Кванторы: {\color{blue}$(\forall x.\varphi)$} и {\color{blue}$(\exists x.\varphi)$}.
+\end{enumerate}
+\end{enumerate}
+\subsection{Сокращения метаязыка для исчисления предикатов.}
+
+\noindent \textbf{ Определение. }
+\begin{enumerate}
+  \item Метапеременные:
+  \begin{enumerate}
+  \item $\color{blue}\psi$, $\color{blue}\phi$, $\color{blue}\pi$, \dots --- формулы
+  \item $\color{blue}P$, $\color{blue}Q$, \dots --- предикатные символы
+  \item $\color{blue}\theta$, \dots --- термы
+  \item $\color{blue}f$, $\color{blue}g$, \dots --- функциональные символы
+  \item $\color{blue}x$, $\color{blue}y$, \dots --- предметные переменные
+  \end{enumerate}
+  
+  \item Скобки --- как в И.В.; квантор --- жадный:
+  \begin{center}${\color{blue}(\forall a.} \underbrace{{\color{blue}A \vee B \vee C \rightarrow \exists b.}
+                      \underbrace{\color{blue}D \with \neg E}_{\exists b.\dots}}_{\forall a.\dots} \color{blue}) \with F$\end{center}
+  
+  
+  \item Дополнительные обозначения при необходимости:
+  \begin{enumerate}
+  \item $\color{blue}(\theta_1 = \theta_2)$ вместо $\color{blue}E(\theta_1,\theta_2)$
+  \item $\color{blue}(\theta_1 + \theta_2)$ вместо $\color{blue}p(\theta_1,\theta_2)$
+  \item $\color{blue}0$ вместо $\color{blue}z$
+  \item \dots
+  \end{enumerate}
+  
+  \end{enumerate}
+
+\subsection{Cледование в исчислении предикатов.}
+\noindent \textbf{ Определение. }
+$\gamma_1,\gamma_2,\dots,\gamma_n\models\alpha$, если выполнено два условия:
+\begin{enumerate}
+\item $\alpha$ выполнено всегда, когда выполнено $\gamma_1,\gamma_2,\dots,\gamma_n$;
+\item $\alpha$ не использует кванторов по переменным, входящим свободно в $\gamma_1,\gamma_2,\dots,\gamma_n$.
+\end{enumerate}
+
+\noindent \textbf{ Теорема. }
+Если $\Gamma\vdash\alpha$ и в доказательстве не используются кванторы по свободным
+переменным из $\Gamma$, то $\Gamma\models\alpha$\
+\subsection{Теорема о дедукции в исчислении предикатов (формулировка).}
+\noindent \textbf{ Теорема. }
+Если $\Gamma\vdash\alpha\rightarrow\beta$, то $\Gamma,\alpha\vdash\beta$.
+Если $\Gamma,\alpha\vdash\beta$ и в доказательстве не применяются правила для кванторов 
+по свободным переменным из $\alpha$, то $\Gamma\vdash\alpha\rightarrow\beta$.
+
+\subsection{Теорема о корректности исчисления предикатов (формулировка).}
+\noindent \textbf{ Теорема. }
+Если $\theta$ свободен для подстановки 
+вместо $x$ в $\varphi$, то $\llbracket\varphi\rrbracket^{x := \llbracket\theta\rrbracket} = \llbracket\varphi[x := \theta]\rrbracket$
+
+\noindent \textbf{ Теорема. }
+Если $\Gamma \vdash \alpha$ и в доказательстве не используются кванторы по свободным переменным из $FV(\Gamma)$, то $\Gamma \models \alpha$\
 \end{document}
