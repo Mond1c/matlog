@@ -343,4 +343,65 @@ $a + b = b + a$
 \item нелогической схемой аксиом индукции $\psi[x:=0]\with(\forall x.\psi\to \psi[x:=x'])\to \psi$ с метапеременными $x$ и $\psi$.
 \end{enumerate}
 
+\section{Примитивно-рекурсивные и рекурсивные функции. 
+функций вычисления простых чисел. Частичный логарифм.
+Выразимость отношений и представимость функций в формальной арифметике. Характеристические функции.
+Функция Аккермана.}
+
+\subsection{Примитивно-рекурсивные функции}
+
+\noindent {\bf Определение (Примитивы Z, N, U, S).}
+\begin{enumerate}
+\item Примитив <<Ноль>> ($Z$) \vspace{-0.3cm}
+$$Z: \mathbb{N}_0\to\mathbb{N}_0,\ \ \ \ \ Z(x_1) = 0$$\vspace{-0.5cm}
+\item Примитив <<Инкремент>> ($N$) \vspace{-0.3cm}
+$$N: \mathbb{N}_0\to\mathbb{N}_0,\ \ \ \ \ N(x_1) = x_1+1$$\vspace{-0.5cm}
+\item Примитив <<Проекция>> ($U$) — семейство функций; пусть $k,n \in \mathbb{N}_0, k \le n$\vspace{-0.2cm}
+$$U^k_n: \mathbb{N}^n_0 \to \mathbb{N}_0,\ \ \ \ \ U^k_n(\overrightarrow{x}) = x_k$$\vspace{-0.5cm}
+\item Примитив <<Подстановка>> ($S$) --- семейство функций; пусть $g: \mathbb{N}^k_0 \to \mathbb{N}_0,\ \ f_1,\dots,f_k: \mathbb{N}^n_0 \to \mathbb{N}_0$
+$$S\langle g,f_1,f_2,\dots,f_k \rangle (\overrightarrow{x}) = g(f_1(\overrightarrow{x}),\dots,f_k(\overrightarrow{x}))$$
+\end{enumerate}
+
+\subsection{Примитивная рекурсия}
+\subsubsection{Определения.}
+\noindent {\bf Определение.} [примитив <<примитивная рекурсия>>, $R$]
+Пусть $f: \mathbb{N}^n_0\to\mathbb{N}_0$ и $g: \mathbb{N}^{n+2}_0 \to\mathbb{N}_0$.
+Тогда $R\langle f,g\rangle: \mathbb{N}^{n+1}_0\to\mathbb{N}_0$, причём
+
+$$R\langle f,g\rangle(\overrightarrow{x},y)=
+ \left\{\begin{array}{ll} 
+  f(\overrightarrow{x}), &y=0\\
+  g(\overrightarrow{x},y-1,R\langle f,g\rangle (\overrightarrow{x},y-1)), &y > 0
+\end{array}\right.$$
+
+\noindent {\bf Определение.} Функция $f$ --- примитивно-рекурсивна, если может быть
+выражена как композиция примитивов $Z$, $N$, $U$, $S$ и $R$.
+
+\noindent {\bf Теорема.} 
+$f(x) = x+2$ примитивно-рекурсивна
+
+
+\noindent {\bf Лемма.} 
+$f(a,b) = a+b$ примитивно-рекурсивна
+
+\subsubsection {Какие функции примитивно-рекурсивные?}
+\begin{enumerate}
+\item Сложение, вычитание
+\item Умножение, деление
+\item Вычисление простых чисел
+\item Неформально: все функции, вычисляемые конечным числом вложенных циклов \verb!for!:
+
+\begin{verbatim}
+for (int i1 = 0; i1 < g1(x1...xn); i1++) {
+    for (int i2 = 0; i2 < g2(x1...xn,i1); i2++) {
+        ...
+           for (int ik = 0; ik < gk(x1...xn,i1,i2...); ik++) {
+               // выражение без циклов
+           }
+        ...
+    }
+}
+\end{verbatim}
+\end{enumerate}
+
 \end{document}
