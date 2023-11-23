@@ -1,0 +1,346 @@
+\documentclass[10pt,a4paper,oneside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{stmaryrd}
+\usepackage{cmll}
+\usepackage{mathrsfs}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
+\usepackage{proof}
+\usepackage{tikz}
+\usepackage{multicol}
+\usepackage{mathabx}
+\usepackage{comment}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+\usepackage{cmll}
+\usepackage{xcolor}
+\usepackage{proof}
+\usetikzlibrary{hobby,fit,backgrounds,calc,shapes.geometric,patterns}
+\usetikzlibrary{patterns}
+\usepackage[normalem]{ulem}
+
+\newcommand\doubleplus{+\kern-1.3ex+\kern0.8ex}
+\newcommand\mdoubleplus{\ensuremath{\mathbin{+\mkern-10mu+}}}
+
+\begin{document}
+
+\section{Исчисление предикатов}
+\subsection{Исчисление предикатов}
+\subsubsection{Язык исчисления предикатов}
+\begin{enumerate}
+\item Два типа: предметные и логические выражения.
+\item Предметные выражения: метапеременная {\color{blue}$\theta$}.
+\begin{enumerate}
+\item Предметные переменные: {\color{blue}$a$}, {\color{blue}$b$}, {\color{blue}$c$}, \dots, метапеременные {\color{blue}$x$}, {\color{blue}$y$}.
+\item Функциональные выражения: {\color{blue}$f(\theta_1,\dots,\theta_n)$}, метапеременные {\color{blue}$f$}, {\color{blue}$g$}, \dots\\
+%Имена разнообразны: {\color{blue}$(\theta_1+\theta_2)$}, {\color{blue}$0$} и т.п.
+\item Примеры: %{\color{blue}$(x+1)^2$}. \\
+% Раскроем сокращения: {\color{blue}$(\theta_0+\theta_1)\equiv p(\theta_0,\theta_1)$},
+%   {\color{blue}$\theta_1^2\equiv q(\theta_1)$}, {\color{blue}$1\equiv r$}, {\color{blue}$2\equiv s$}. \\
+  {\color{blue}$r$},
+  {\color{blue}$q(p(x,s),r)$}.
+\end{enumerate}
+\item Логические выражения: метапеременные {\color{blue}$\alpha$}, {\color{blue}$\beta$}, {\color{blue}$\gamma$}, \dots
+\begin{enumerate}
+\item Предикатные выражения: {\color{blue}$P(\theta_1,\dots,\theta_n)$}, метапеременная {\color{blue}$P$}.\\
+Имена: {\color{blue}$A$}, {\color{blue}$B$}, {\color{blue}$C$}, \dots  %также {\color{blue}$(\theta_1=\theta_2)$} и т.п.
+\item Связки: {\color{blue}$(\varphi\vee\psi)$}, {\color{blue}$(\varphi\with\psi)$}, {\color{blue}$(\varphi\rightarrow\psi)$}, 
+   {\color{blue}$(\neg\varphi)$}.
+\item Кванторы: {\color{blue}$(\forall x.\varphi)$} и {\color{blue}$(\exists x.\varphi)$}.
+\end{enumerate}
+\end{enumerate}
+
+\subsubsection{Сокращения записи, метаязык}
+
+\begin{enumerate}
+\item Метапеременные:
+\begin{enumerate}
+\item $\color{blue}\psi$, $\color{blue}\phi$, $\color{blue}\pi$, \dots --- формулы
+\item $\color{blue}P$, $\color{blue}Q$, \dots --- предикатные символы
+\item $\color{blue}\theta$, \dots --- термы
+\item $\color{blue}f$, $\color{blue}g$, \dots --- функциональные символы
+\item $\color{blue}x$, $\color{blue}y$, \dots --- предметные переменные
+\end{enumerate}
+
+\item Скобки --- как в И.В.; квантор --- жадный:
+\begin{center}${\color{blue}(\forall a.} \underbrace{{\color{blue}A \vee B \vee C \rightarrow \exists b.}
+                    \underbrace{\color{blue}D \with \neg E}_{\exists b.\dots}}_{\forall a.\dots} \color{blue}) \with F$\end{center}
+
+\item Дополнительные обозначения при необходимости:
+\begin{enumerate}
+\item $\color{blue}(\theta_1 = \theta_2)$ вместо $\color{blue}E(\theta_1,\theta_2)$
+\item $\color{blue}(\theta_1 + \theta_2)$ вместо $\color{blue}p(\theta_1,\theta_2)$
+\item $\color{blue}0$ вместо $\color{blue}z$
+\item \dots
+\end{enumerate}
+
+\end{enumerate}
+
+\subsubsection{Оценка исчисления предикатов}
+{\bf Определение.} Оценка --- упорядоченная четвёрка $\langle D, F, P, E \rangle$, где:
+
+\begin{enumerate}
+\item $D$ --- предметное множество;
+\item $F$ --- оценка для функциональных символов; пусть $f_n$ --- $n$-местный функциональный символ:
+ $$F_{f_n}: D^n \rightarrow D$$
+
+\item $P$ --- оценка для предикатных символов; пусть $T_n$ --- $n$-местный предикатный символ:
+ $$P_{T_n}: D^n \rightarrow V\quad\quad\quad V = \{\text{И}, \text{Л}\}$$
+
+\item $E$ --- оценка для предметных переменных.
+ $$E(x) \in D$$
+\end{enumerate}
+
+\subsubsection{Оценка формулы}
+
+Запись и сокращения записи подобны исчислению высказываний: $$\llbracket \phi \rrbracket \in V,\quad
+      \llbracket Q(x,f(x))\vee R\rrbracket^{x := 1, f(t) := t^2, R := \text{И}} = \text{И}$$
+
+\begin{enumerate}
+\item Правила для связок $\vee$, $\with$, $\neg$, $\rightarrow$ остаются прежние;
+\item $\llbracket f_n (\theta_1, \theta_2, \dots, \theta_n) \rrbracket = F_{f_n} (\llbracket\theta_1\rrbracket,
+          \llbracket\theta_2\rrbracket, \dots, \llbracket\theta_n\rrbracket)$
+\item $\llbracket P_n (\theta_1, \theta_2, \dots, \theta_n) \rrbracket = P_{T_n} (\llbracket\theta_1\rrbracket,
+          \llbracket\theta_2\rrbracket, \dots, \llbracket\theta_n\rrbracket)$
+\item $$\llbracket \forall x.\phi \rrbracket = \left\{\begin{array}{ll}
+   \text{И}, & \text{если } \llbracket\phi\rrbracket^{x := t} = \text{И}\text{ при всех } t \in D\\
+   \text{Л}, & \text{если найдётся } t \in D, \text{ что } \llbracket\phi\rrbracket^{x := t} = \text{Л}
+  \end{array}\right.$$
+\item $$\llbracket \exists x.\phi \rrbracket = \left\{\begin{array}{ll}
+   \text{И}, & \text{если найдётся } t \in D, \text{ что } \llbracket\phi\rrbracket^{x := t} = \text{И}\\
+   \text{Л}, & \text{если } \llbracket\phi\rrbracket^{x := t} = \text{Л}\text{ при всех } t \in D
+  \end{array}\right.$$
+\end{enumerate}
+
+\subsection{Общезначимость, следование, выводимость}
+\subsubsection{Общезначимость}
+{\bf Определение.} Формула исчисления предикатов общезначима, если истинна при любой оценке:
+$$\models\phi$$
+То есть истинна при любых $D$, $F$, $P$ и $E$.
+
+\subsubsection{Следование, выводимость}
+Рассмотрим язык исчисления предикатов. Возьмём все схемы аксиом классического исчисления высказываний и добавим ещё две схемы аксиом 
+(здесь везде $\theta$ свободен для подстановки вместо $x$ в $\varphi$):
+
+\begin{tabular}{ll}
+11. & $(\forall x.\varphi) \rightarrow \varphi[x:=\theta]$\\
+12. & $\varphi[x:=\theta] \rightarrow \exists x.\varphi$ 
+\end{tabular}
+
+Добавим ещё два правила вывода (здесь везде $x$ не входит свободно в $\varphi$):
+$$\infer[\text{Правило для }\forall]{\varphi\rightarrow\forall x.\psi}{\varphi\rightarrow\psi}$$
+$$\infer[\text{Правило для }\exists]{(\exists x.\psi)\rightarrow\varphi}{\psi\rightarrow\varphi}$$
+
+{\bf Определение.} Доказуемость, выводимость, полнота, корректность --- аналогично исчислению высказываний.
+
+\subsection{Теорема о дедукции для исчисления предикатов}
+\subsubsection{Теорема}
+{\bf Теорема.} Если $\Gamma\vdash\alpha\rightarrow\beta$, то $\Gamma,\alpha\vdash\beta$.
+Если $\Gamma,\alpha\vdash\beta$ и в доказательстве не применяются правила для кванторов 
+по свободным переменным из $\alpha$, то $\Gamma\vdash\alpha\rightarrow\beta$.
+
+\subsubsection{Следование}
+{\bf Определение.} $\gamma_1,\gamma_2,\dots,\gamma_n\models\alpha$, если выполнено два условия:
+\begin{enumerate}
+\item $\alpha$ выполнено всегда, когда выполнено $\gamma_1,\gamma_2,\dots,\gamma_n$;
+\item $\alpha$ не использует кванторов по переменным, входящим свободно в $\gamma_1,\gamma_2,\dots,\gamma_n$.
+\end{enumerate}
+
+\noindent {\bf Теорема.} Если $\Gamma\vdash\alpha$ и в доказательстве не используются кванторы по свободным
+переменным из $\Gamma$, то $\Gamma\models\alpha$
+
+\subsection{Корректность}
+\subsubsection{Теорема}
+%\begin{thm}Если $\Gamma\vdash\alpha$,
+%и $\alpha$ не использует кванторов по переменным, входящим
+%свободно в $\Gamma$,
+% то $\Gamma\models\alpha$\end{thm}
+%\begin{thm}В любой модели для любой $\forall y.\varphi$ найдётся $\mathcal{y} \in \mathcal{D}$, что $\llbracket\forall y.\varphi\rrbracket = \llbracket\varphi\rrbracket^{y := \mathcal{y}}$\end{thm}
+{\bf Теорема.} Если $\theta$ свободен для подстановки 
+вместо $x$ в $\varphi$, то $\llbracket\varphi\rrbracket^{x := \llbracket\theta\rrbracket} = \llbracket\varphi[x := \theta]\rrbracket$
+
+\section{Непротиворечивое множество формул}
+\subsection{Непротиворечивое множество формул}
+\subsubsection{Определение}
+{\bf Определение.} $\Gamma$ --- \emph{непротиворечивое множество формул},
+если $\Gamma\not\vdash\alpha\with\neg\alpha$ для любого $\alpha$
+
+\subsubsection{Примеры}
+\begin{enumerate}
+\item непротиворечиво: \begin{itemize}
+\item $\Gamma = \{A \rightarrow B \rightarrow A\}$
+\item $\Gamma = \{P(x,y)\rightarrow\neg P(x,y), \forall x.\forall y.\neg P(x,y)\}$;
+\end{itemize}
+\item противоречиво: \begin{itemize}
+\item $\Gamma = \{P\rightarrow\neg P, \neg P \rightarrow P\}$
+
+так как
+$P\rightarrow\neg P, \neg P \rightarrow P \ \vdash\  \neg P \with \neg\neg P$
+\end{itemize}
+\item пусть $D = \mathbb{Z}$ и $P(x) \equiv (x > 0)$, аналогом для этой модели
+будет $\Gamma = \{P(1), P(2), P(3), \dots\}$
+\end{enumerate}
+
+\subsection{Полное непротиворечивое множество формул}
+{\bf Определение.} $\Gamma$ --- \emph{полное} непротиворечивое множество замкнутых бескванторных формул,
+если:
+\begin{enumerate}\item $\Gamma$ содержит только замкнутые бескванторные формулы;
+\item если $\alpha$ --- некоторая замкнутая бескванторная формула, то $\alpha\in\Gamma$ или $\neg\alpha\in\Gamma$.
+\end{enumerate}
+
+\noindent {\bf Определение.} $\Gamma$ --- \emph{полное} непротиворечивое множество замкнутых формул, если:
+\begin{enumerate}\item $\Gamma$ содержит только замкнутые формулы;
+\item если $\alpha$ --- некоторая замкнутая формула, то $\alpha \in \Gamma$, или $\neg\alpha \in \Gamma$.
+\end{enumerate}
+
+\noindent {\bf Теорема.} Пусть $\Gamma$ --- непротиворечивое множество замкнутых (бескванторных) формул. Тогда, какова бы ни была
+замкнутая (бескванторная) формула $\varphi$, хотя бы $\Gamma \cup \{\varphi\}$ или $\Gamma \cup \{\neg\varphi\}$ ---
+непротиворечиво.
+
+\subsection{Доказательство существования моделей у непротиворечивых множеств формул 
+в бескванторном исчислении предикатов.}
+\subsubsection{Модель для множества формул}
+\noindent {\bf Определение.} Моделью для множества формул $F$ назовём такую модель $\mathcal{M}$, что
+    при всяком $\varphi \in F$ выполнено $\llbracket\varphi\rrbracket_\mathcal{M} = \text{И}$
+    
+\noindent Альтернативное обозначение: $\mathcal{M}\models\varphi$.
+
+\subsubsection{Теорема}
+\noindent {\bf Теорема.} Любое непротиворечивое множество замкнутых бескванторных формул имеет модель.    
+
+\subsubsection{Доказательство теоремы о существовании модели}
+{\bf Лемма.} Пусть $\varphi$ --- бескванторная формула, тогда $\mathcal{M}\models\varphi$ тогда и только тогда, когда $\varphi\in M$
+
+
+\noindent {\bf Докозательство теоремы.}
+
+Пусть $M$ --- непротиворечивое множество замкнутых бескванторных формул.
+
+По теореме о пополнении существует $M'$ --- полное непротиворечивое множество замкнутых бескванторных формул,
+что $M \subseteq M'$.
+
+По лемме $M'$ имеет модель, эта модель подойдёт для $M$.
+
+\subsection{Теорема Гёделя о полноте исчисления предикатов}
+\subsubsection{Теорема}
+{\bf Теорема.} Если $M$ --- замкнутое непротиворечивое множество формул, то оно имеет модель.
+
+\subsection{Полнота исчисления предикатов}
+\subsubsection{Следствие}
+{\bf Следствие (из теоремы Гёделя о полноте).}
+Исчисление предикатов полно.
+
+\section{Машина Тьюринга. Задача об останове, её неразрешимость. Неразрешимость исчисления предикатов.}
+
+\subsection{Машина Тьюринга.}
+\noindent {\bf Определение.} Машина Тьюринга:
+\begin{enumerate}
+\item Внешний алфавит $q_1, \dots, q_n$, выделенный символ-заполнитель $q_\varepsilon$
+\item Внутренний алфавит (состояний) $s_1, \dots, s_k$; $s_s$ --- начальное, $s_f$ --- допускающее, $s_r$ --- отвергающее.
+\item Таблица переходов $\langle k, s \rangle \Rightarrow \langle k', s', \leftrightarrow \rangle$
+\end{enumerate}
+
+\noindent {\bf Определение.} Состояние машины Тьюринга:
+\begin{enumerate}
+\item Бесконечная лента с символом-заполнителем $q_\varepsilon$, текст конечной длины.
+\item Головка над определённым символом.
+\item Символ состояния (состояние в узком смысле) --- символ внутреннего алфавита.
+\end{enumerate}
+
+\subsection{Задача об останове, её неразрешимость.}
+\subsubsection{Разрешимость.}
+\noindent {\bf Определение.} Язык --- множество строк
+
+\noindent {\bf Определение.} Язык $L$ разрешим, если существует машина Тьюринга, которая для любого слова $w$ переходит в допускающее состояние, если $w \in L$,
+и в отвергающее, если $w \notin L$.
+
+\subsubsection{Неразрешимость задачи останова.}
+\noindent {\bf Определение.} Рассмотрим все возможные описания машин Тьюринга. Составим упорядоченные пары: описание машины Тьюринга и входная строка.
+Из них выделим язык останавливающихся на данном входе машин Тьюринга.
+
+\noindent{\bf Теорема.} Язык всех останавливающихся машин Тьюринга неразрешим.
+
+\subsection{Неразрешимость исчисления предикатов: доказательство}
+\noindent{\bf Теорема.} Язык всех доказуемых формул исчисления предикатов неразрешим
+Т.е. нет машины Тьюринга, которая бы по любой формуле $\alpha$ определяла, доказуема ли она.
+
+\noindent{\bf Доказательство.}  Пусть существует машина Тьюринга, разрешающая любую формулу.
+На её основе тогда несложно построить некоторую машину Тьюринга, перестраивающую любую машину $S$ (с допускающим состоянием $s_f$ и входом $y$) 
+в её ограничения $C$ и разрешающую формулу ИП $C \rightarrow \exists w_l.\exists w_r.F_{S,y}(w_l,w_r,s_f)$. 
+Эта машина разрешит задачу останова.
+
+\section{Порядок теории (0, 1, 2). Теории первого порядка. Аксиоматика Пеано. Арифметические операции. Формальная арифметика.}
+\subsection{Порядок теории (0, 1, 2).}
+
+\subsection{Аксиоматика Пеано.}
+\subsubsection{Натуральные числа: аксиоматика Пеано, 1889}\vspace{-0.5cm}
+ $$\mathbb{N}: 1, 2, \dots \mbox{ или } \mathbb{N}_0: 0, 1, 2, \dots$$\vspace{-1cm}
+\noindent {\bf Определение.} 
+  $N$ (или, более точно, $\langle N, 0, (')\rangle$) \emph{соответствует} аксиоматике Пеано, 
+  если следующее определено/выполнено:
+  \begin{enumerate}
+     \item Операция <<штрих>> $('): N \to N$, причём нет $a,b \in N$, что $a \ne b$, но $a' = b'$.
+           
+           Если $x = y'$, то $x$ назовём следующим за $y$, а $y$ --- предшествующим $x$.
+     \item Константа $0 \in N$: нет $x \in N$, что $x' = 0$.
+     \item Индукция. Каково бы ни было свойство (<<предикат>>) $P: N \to V$, если:
+           \begin{enumerate}
+           \item $P(0)$
+           \item При любом $x\in N$ из $P(x)$ следует $P(x')$
+           \end{enumerate}
+           то при любом $x \in N$ выполнено $P(x)$.
+  \end{enumerate}
+Как построить? Например, в стиле алгебры Линденбаума:
+\begin{enumerate}
+\item $N$ --- язык, порождённый грамматикой $\nu ::= \texttt{0}\ |\ \nu \texttt{<<'>>}$
+\item $0$ --- это $\text{<<0>>}$, $x'$ --- это $x \doubleplus \texttt{<<'>>}$
+\end{enumerate}
+
+\subsection{Арифметические операции.}
+
+\subsubsection{Обозначения и определения}
+\noindent {\bf Определение.}
+$1 = 0'$, $2 = 0''$, $3 = 0'''$, $4 = 0''''$, $5 = 0'''''$, $6 = 0''''''$,
+$7 = 0'''''''$, $8 = 0''''''''$, $9 = 0'''''''''$
+
+\noindent {\bf Определение.}\vspace{-0.3cm}
+$$a + b = \left\{ \begin{array}{ll} a, & \mbox{если } b = 0\\
+                                    (a + c)', & \mbox{если } b = c'
+                  \end{array}\right.$$
+\vspace{-0.3cm}
+Например, $$2 + 2 = 0'' + 0'' = (0'' + 0')' = ((0'' + 0)')' = ((0'')')' = 0'''' = 4$$\vspace{-0.3cm}
+
+\noindent {\bf Определение.}\vspace{-0.3cm}
+$$a \cdot b = \left\{ \begin{array}{ll} 0, & \mbox{если } b = 0\\
+                                    a \cdot c + a, & \mbox{если } b = c'
+                  \end{array}\right.$$
+                  
+\subsubsection{Коммутативность сложения.}
+\noindent{\bf Теорема.} 
+$a + b = b + a$
+
+\subsection{Формальная арифметика.}
+\noindent {\bf Определение.} 
+Формальная арифметика --- теория первого порядка, со следующими добавленными нелогическими \dots
+\begin{enumerate}
+\item двухместными функциональными символами $(+)$, $(\cdot)$; одноместным функциональным символом $(')$, 
+нульместным функциональным символом $0$;
+\item двухместным предикатным символом $(=)$;
+\item восемью нелогическими \emph{аксиомами}:\vspace{0.1cm}
+\begin{tabular}{ll}
+(A1) $a=b \to a=c \to b=c$             &(A5) $a+0 = a$                     \\
+(A2) $a=b \to a'=b'$                   &(A6) $a+b' = (a+b)'$               \\
+(A3) $a'=b' \to a=b$                   &(A7) $a\cdot 0 = 0$                \\
+(A4) $\neg a' = 0$                     &(A8) $a\cdot b' = a \cdot b + a$
+\end{tabular}
+\item нелогической схемой аксиом индукции $\psi[x:=0]\with(\forall x.\psi\to \psi[x:=x'])\to \psi$ с метапеременными $x$ и $\psi$.
+\end{enumerate}
+
+\end{document}
