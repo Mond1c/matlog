@@ -119,13 +119,7 @@
   \end{array}\right.$$
 \end{enumerate}
 
-\subsection{Общезначимость, следование, выводимость}
-\subsubsection{Общезначимость}
-{\bf Определение.} Формула исчисления предикатов общезначима, если истинна при любой оценке:
-$$\models\phi$$
-То есть истинна при любых $D$, $F$, $P$ и $E$.
-
-\subsubsection{Следование, выводимость}
+\subsubsection{Аксиомы и правила вывода.}
 Рассмотрим язык исчисления предикатов. Возьмём все схемы аксиом классического исчисления высказываний и добавим ещё две схемы аксиом 
 (здесь везде $\theta$ свободен для подстановки вместо $x$ в $\varphi$):
 
@@ -138,13 +132,16 @@ $$\models\phi$$
 $$\infer[\text{Правило для }\forall]{\varphi\rightarrow\forall x.\psi}{\varphi\rightarrow\psi}$$
 $$\infer[\text{Правило для }\exists]{(\exists x.\psi)\rightarrow\varphi}{\psi\rightarrow\varphi}$$
 
-{\bf Определение.} Доказуемость, выводимость, полнота, корректность --- аналогично исчислению высказываний.
+\subsection{Общезначимость, следование, выводимость}
+\subsubsection{Общезначимость}
+{\bf Определение.} Формула исчисления предикатов общезначима, если истинна при любой оценке:
+$$\models\phi$$
+То есть истинна при любых $D$, $F$, $P$ и $E$.
 
-\subsection{Теорема о дедукции для исчисления предикатов}
-\subsubsection{Теорема}
-{\bf Теорема.} Если $\Gamma\vdash\alpha\rightarrow\beta$, то $\Gamma,\alpha\vdash\beta$.
-Если $\Gamma,\alpha\vdash\beta$ и в доказательстве не применяются правила для кванторов 
-по свободным переменным из $\alpha$, то $\Gamma\vdash\alpha\rightarrow\beta$.
+\subsubsection{Выводимость}
+
+
+{\bf Определение.} Доказуемость, выводимость, полнота, корректность --- аналогично исчислению высказываний.
 
 \subsubsection{Следование}
 {\bf Определение.} $\gamma_1,\gamma_2,\dots,\gamma_n\models\alpha$, если выполнено два условия:
@@ -153,18 +150,20 @@ $$\infer[\text{Правило для }\exists]{(\exists x.\psi)\rightarrow\varph
 \item $\alpha$ не использует кванторов по переменным, входящим свободно в $\gamma_1,\gamma_2,\dots,\gamma_n$.
 \end{enumerate}
 
+\subsection{Теорема о дедукции для исчисления предикатов}
+\subsubsection{Теорема}
+{\bf Теорема.} Если $\Gamma\vdash\alpha\rightarrow\beta$, то $\Gamma,\alpha\vdash\beta$.
+Если $\Gamma,\alpha\vdash\beta$ и в доказательстве не применяются правила для кванторов 
+по свободным переменным из $\alpha$, то $\Gamma\vdash\alpha\rightarrow\beta$.
+
 \noindent {\bf Теорема.} Если $\Gamma\vdash\alpha$ и в доказательстве не используются кванторы по свободным
 переменным из $\Gamma$, то $\Gamma\models\alpha$
 
 \subsection{Корректность}
 \subsubsection{Теорема}
-%\begin{thm}Если $\Gamma\vdash\alpha$,
-%и $\alpha$ не использует кванторов по переменным, входящим
-%свободно в $\Gamma$,
-% то $\Gamma\models\alpha$\end{thm}
-%\begin{thm}В любой модели для любой $\forall y.\varphi$ найдётся $\mathcal{y} \in \mathcal{D}$, что $\llbracket\forall y.\varphi\rrbracket = \llbracket\varphi\rrbracket^{y := \mathcal{y}}$\end{thm}
-{\bf Теорема.} Если $\theta$ свободен для подстановки 
-вместо $x$ в $\varphi$, то $\llbracket\varphi\rrbracket^{x := \llbracket\theta\rrbracket} = \llbracket\varphi[x := \theta]\rrbracket$
+
+{\bf Теорема.} Если $\Gamma \vdash \alpha$ и в доказательстве не используются кванторы по свободным переменным из $FV(\Gamma)$, то $\Gamma \models \alpha$
+
 
 \section{Непротиворечивое множество формул}
 \subsection{Непротиворечивое множество формул}
