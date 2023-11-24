@@ -808,28 +808,27 @@ $$\infer{\Gamma,\varphi \vdash_\rightarrow \varphi}{} \quad\quad
 \subsection{Просто-типизированное лямбда исчисление.}
 \noindent {\bf Теорема.} Если $\Gamma\vdash\alpha$, то $\Gamma\vdash_\rightarrow\alpha$.
 
-\noindent Из корректности моделей Крипке следует, что что если $\Gamma\vdash\alpha$, то $\Gamma\Vdash \alpha$.
-Требуемое следует из того, что $\Gamma\Vdash \alpha$ влечёт $\Gamma\vdash_\rightarrow\alpha$.
+\noindent {\bf Определение.}  
+Просто-типизированное лямбда-исчисление по Карри.
+$$\infer[x \notin \Gamma]{\Gamma,x:\varphi \vdash x:\varphi}{} \quad\quad 
+  \infer[x \notin \Gamma]{\Gamma\vdash \lambda x.A: \varphi\rightarrow\psi}{\Gamma,x:\varphi\vdash A:\psi} \quad\quad 
+  \infer{\Gamma\vdash B A:\psi}{\Gamma\vdash A:\varphi\quad\quad\Gamma\vdash B:\varphi\rightarrow\psi}$$
+
+\noindent Просто-типизированное лямбда-исчисление по Чёрчу. 
+$$\infer[x \notin \Gamma]{\Gamma,x:\varphi \vdash x:\varphi}{} \quad\quad 
+  \infer[x \notin \Gamma]{\Gamma\vdash \lambda x^{\color{blue}\varphi}.A: \varphi\rightarrow\psi}{\Gamma,x:\varphi\vdash A:\psi} \quad\quad 
+  \infer{\Gamma\vdash B A:\psi}{\Gamma\vdash A:\varphi\quad\quad\Gamma\vdash B:\varphi\rightarrow\psi}$$
 
 \subsection{Изоморфизм Карри-Ховарда (высказывание, доказательство, импликация, конъюнкция, дизъюнкция, ложь).}
 
-\noindent {\bf Определение.}  Ложь ($\bot$) --- необитаемый тип;
-$\texttt{failwith/raise/throw} : \alpha\rightarrow\bot$; $\neg\varphi\equiv\varphi\rightarrow\bot$
-
-
-\noindent Например, контрапозиция:
-$(\alpha\rightarrow\beta)\rightarrow(\neg\beta\rightarrow\neg\alpha)$
-
-$$\infer[\lambda]{\lambda f^{\alpha\rightarrow\beta}.\lambda n^{\beta\rightarrow\bot}.\lambda a^\alpha.n\ (f\ a): (\alpha\rightarrow\beta)\rightarrow(\neg\beta\rightarrow\neg\alpha)}
-        {\infer[\lambda]{f:\alpha\rightarrow\beta\vdash\lambda n^{\beta\rightarrow\bot}.\lambda a^\alpha.n\ (f\ a): \neg\beta\rightarrow\neg\alpha}
-               {\infer[\lambda]{f:\alpha\rightarrow\beta,n:\beta\rightarrow\bot\vdash\lambda a^\alpha.n\ (f\ a): \neg\alpha}{
-                       \infer[App]{f:\alpha\rightarrow\beta,n:\beta\rightarrow\bot, a:\alpha \vdash n\ (f\ a): \bot}{
-                              \infer[App]{\Phi \vdash f\ a: \beta}{\infer[Ax]{\Phi \vdash a: \alpha}{}\quad\quad\infer[Ax]{\Phi \vdash f:\alpha\rightarrow\beta}{}}
-    \quad\quad \infer[Ax]{\Phi \vdash n: \beta\rightarrow\bot}{}
-               }
-               }}}$$
-
-Снятие двойного отрицания: $((\alpha\rightarrow\bot)\rightarrow\bot)\rightarrow\alpha$, то есть $\lambda f^{(\alpha\rightarrow\bot)\rightarrow\bot}.?: \alpha$.\\
-$f$ угадывает, что передать $x: \alpha\rightarrow\bot$. Тогда надо по $f$ угадать, что передать $x$.
+\begin{tabular}{ll}
+$\lambda$-исчисление & исчисление высказываний\\\hline
+Выражение & доказательство\\
+Тип выражения & высказывание\\
+Тип функции & импликация\\
+Упорядоченная пара & Конъюнкция\\
+Алгебраический тип & Дизъюнкция\\
+Необитаемый тип & Ложь
+\end{tabular}
 
 \end{document}
