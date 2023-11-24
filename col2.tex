@@ -429,12 +429,37 @@ for (int i1 = 0; i1 < g1(x1...xn); i1++) {
 
 \subsection{Частичный логарифм.}
 
+$plog_k(p^n \cdot m^t \cdot k^a) = a$
+
 \subsection{Выразимость отношений и представимость функций в формальной арифметике.}
 \noindent {\bf Теорема.} Любая рекурсивная функция представима в Ф.А.
 
 \noindent {\bf Теорема.} Любая представимая в Ф.А. функция рекурсивна.
 
+\noindent {\bf Определение.} 
+Будем говорить, что функция $f: \mathbb{N}^n_0\to\mathbb{N}_0$ представима в ФА, 
+если существует формула $\varphi$, что:
+\begin{enumerate}
+\item если $f(a_1,\dots,a_n) = u$, то $\vdash \varphi(\overline{a_1},\dots,\overline{a_n},\overline{u})$
+\item если $f(a_1,\dots,a_n) \ne u$, то $\vdash \neg\varphi(\overline{a_1},\dots,\overline{a_n},\overline{u})$
+\item для всех $a_i \in \mathbb{N}_0$ выполнено $\vdash (\exists x.\varphi(\overline{a_1},\dots,\overline{a_n},x)) \with 
+   (\forall p.\forall q.\varphi(\overline{a_1},\dots,\overline{a_n},p)\with \varphi(\overline{a_1},\dots,\overline{a_n},q)\rightarrow p=q)$
+\end{enumerate}
+
+\noindent {\bf Определение.} 
+Будем говорить, что отношение $R\subseteq \mathbb{N}^n_0$ выразимо в ФА, 
+если существует формула $\rho$, что:
+\begin{enumerate}
+\item если $\langle a_1,\dots,a_n \rangle \in R$, то $\vdash \rho(\overline{a_1},\dots,\overline{a_n})$
+\item если $\langle a_1,\dots,a_n \rangle \notin R$, то $\vdash \neg\rho(\overline{a_1},\dots,\overline{a_n})$
+\end{enumerate}
+
+
+\noindent {\bf Теорема.}  отношение <<равно>> выразимо в Ф.А.:
+$R = \{ \langle x,x \rangle\ |\ x \in \mathbb{N}_0 \}$
+
 \subsection{Характеристические функции.}
+Характеристическая функция арифметического отношения $R$ - это функция $C_R(x_1,...,x_n) = \begin{cases}0 \  R(x_1,...,x_n) \\ 1 \  R(x_1,...,x_n) \  \text{неверно} \end{cases}$
 
 \subsection{Функция Аккермана.}
 \noindent {\bf Определение.} 
