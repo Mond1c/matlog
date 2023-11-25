@@ -156,8 +156,6 @@ $$\models\phi$$
 Если $\Gamma,\alpha\vdash\beta$ и в доказательстве не применяются правила для кванторов 
 по свободным переменным из $\alpha$, то $\Gamma\vdash\alpha\rightarrow\beta$.
 
-\noindent {\bf Теорема.} Если $\Gamma\vdash\alpha$ и в доказательстве не используются кванторы по свободным
-переменным из $\Gamma$, то $\Gamma\models\alpha$
 
 \subsection{Корректность}
 \subsubsection{Теорема}
@@ -234,7 +232,7 @@ $P\rightarrow\neg P, \neg P \rightarrow P \ \vdash\  \neg P \with \neg\neg P$
 \subsection{Полнота исчисления предикатов}
 \subsubsection{Следствие}
 {\bf Следствие (из теоремы Гёделя о полноте).}
-Исчисление предикатов полно.
+Исчисление предикатов семантически полно.
 
 \section{Машина Тьюринга. Задача об останове, её неразрешимость. Неразрешимость исчисления предикатов.}
 
@@ -302,8 +300,8 @@ $P\rightarrow\neg P, \neg P \rightarrow P \ \vdash\  \neg P \with \neg\neg P$
 \end{tabular}
 
 \subsection{Аксиоматика Пеано.}
-\subsubsection{Натуральные числа: аксиоматика Пеано, 1889}\vspace{-0.5cm}
- $$\mathbb{N}: 1, 2, \dots \mbox{ или } \mathbb{N}_0: 0, 1, 2, \dots$$\vspace{-1cm}
+\subsubsection{Натуральные числа: аксиоматика Пеано, 1889}
+ $$\mathbb{N}: 1, 2, \dots \mbox{ или } \mathbb{N}_0: 0, 1, 2, \dots$$
 \noindent {\bf Определение.} 
   $N$ (или, более точно, $\langle N, 0, (')\rangle$) \emph{соответствует} аксиоматике Пеано, 
   если следующее определено/выполнено:
@@ -425,6 +423,13 @@ for (int i1 = 0; i1 < g1(x1...xn); i1++) {
 }
 \end{verbatim}
 \end{enumerate}
+
+\subsubsection{Общерекурсивные функции.}
+\noindent {\bf Определение.} 
+Функция --- общерекурсивная, если может быть построена при помощи
+примитивов $Z$, $N$, $U$, $S$, $R$ и примитива минимизации:
+$$M\langle f \rangle (x_1,x_2,\dots,x_n) = \min\{y: f(x_1,x_2,\dots,x_n,y) = 0\}$$
+Если $f(x_1,x_2,\dots,x_n,y) > 0$ при любом $y$, результат не определён.
 
 \subsection{Частичный логарифм.}
 
